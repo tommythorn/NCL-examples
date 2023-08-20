@@ -1,0 +1,34 @@
+[*]
+[*] GTKWave Analyzer v3.3.107 (w)1999-2020 BSI
+[*] Wed Aug 16 23:19:16 2023
+[*]
+[dumpfile] "/Users/tommy/projects/NCL/pipeline/pipeline.vcd"
+[dumpfile_mtime] "Wed Aug 16 23:18:40 2023"
+[dumpfile_size] 6550
+[savefile] "/Users/tommy/projects/NCL/pipeline/simple-3stage.gtkw"
+[timestart] 0
+[size] 1579 969
+[pos] -1 -1
+*-7.625796 422 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb.
+[treeopen] tb.pipeline_1.
+[sst_width] 193
+[signals_width] 120
+[sst_expanded] 1
+[sst_vpaned_height] 297
+@200
+-
+@28
+tb.pipeline_1.init
+@22
+tb.pipeline_1.a[3:0]
+tb.pipeline_1.d[3:0]
+tb.pipeline_1.e[3:0]
+@200
+-
+@28
+tb.pipeline_1.ak
+tb.pipeline_1.dk
+tb.pipeline_1.ek
+[pattern_trace] 1
+[pattern_trace] 0
