@@ -63,13 +63,16 @@ pub fn mk_gate(
     println!();
 }
 
-// TH22, NULL init, inverted b (= ack)
-// inputs sorted by criticallity ("a" the most important, "init" the least)
-fn th22ni(init: bool, z: bool, b: bool, a: bool) -> bool {
+// TH22, NULL init, inverted b (= ack) inputs sorted by criticallity
+// ("a" the most important, "init" the least) This was found by
+// measurements to be the fastest order (well, only the placement of
+// input "a" seems to be important and the difference is only 512 MHz
+// vs 544 MHz)
+fn th22ni(a: bool, ack: bool, z: bool, init: bool) -> bool {
 
     if init {
         false // inits to NULL
-    } else if a == !b {
+    } else if a == !ack {
         a
     } else {
         z
@@ -78,7 +81,7 @@ fn th22ni(init: bool, z: bool, b: bool, a: bool) -> bool {
 
 // TH22, DATA init, inverted b (= ack)
 // inputs sorted by criticallity ("a" the most important, "init" the least)
-fn th22di(init: bool, z: bool, ack: bool, a: bool) -> bool {
+fn th22di(a: bool, ack: bool, z: bool, init: bool) -> bool {
 
     if init {
         true // inits to DATA
@@ -91,6 +94,6 @@ fn th22di(init: bool, z: bool, ack: bool, a: bool) -> bool {
 
 fn main() {
     // Make sure the input names matches the function arguments
-    mk_gate("th22ni", "z", "init", "z", "ack", "a", &th22ni);
-    mk_gate("th22di", "z", "init", "z", "ack", "a", &th22di);
+    mk_gate("th22ni", "z", "a", "ack", "z", "init", &th22ni);
+    mk_gate("th22di", "z", "a", "ack", "z", "init", &th22di);
 }
