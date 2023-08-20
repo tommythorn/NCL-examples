@@ -21,5 +21,11 @@ prog: $(DESIGN).bit
 %.config: %.json Makefile
 	$(YOWASP)nextpnr-ecp5 --ignore-loops --json $< $(BOARD) --textcfg $@
 
-%.json: %.v
-	$(YOWASP)yosys -DFPGA=1 -p "synth_ecp5 -json $@" $^
+%.json: %.v ncl_lib.v
+	$(YOWASP)yosys -DFPGA=1 -p "synth_ecp5 -top top -json $@" $^
+
+ncl_lib.v: mk_lut
+	./mk_lut > ncl_lib.v
+
+mk_lut: mk_lut.rs
+	rustc mk_lut.rs
