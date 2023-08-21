@@ -69,7 +69,6 @@ pub fn mk_gate(
 // input "a" seems to be important and the difference is only 512 MHz
 // vs 544 MHz)
 fn th22ni(a: bool, ack: bool, z: bool, init: bool) -> bool {
-
     if init {
         false // inits to NULL
     } else if a == !ack {
@@ -82,10 +81,18 @@ fn th22ni(a: bool, ack: bool, z: bool, init: bool) -> bool {
 // TH22, DATA init, inverted b (= ack)
 // inputs sorted by criticallity ("a" the most important, "init" the least)
 fn th22di(a: bool, ack: bool, z: bool, init: bool) -> bool {
-
     if init {
         true // inits to DATA
     } else if a == !ack {
+        a
+    } else {
+        z
+    }
+}
+
+// TH33
+fn th33(a: bool, b: bool, c: bool, z: bool) -> bool {
+    if a == b && b == c {
         a
     } else {
         z
@@ -96,4 +103,5 @@ fn main() {
     // Make sure the input names matches the function arguments
     mk_gate("th22ni", "z", "a", "ack", "z", "init", &th22ni);
     mk_gate("th22di", "z", "a", "ack", "z", "init", &th22di);
+    mk_gate("th33", "z", "a", "b", "c", "z", &th33);
 }
