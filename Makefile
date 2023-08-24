@@ -13,6 +13,9 @@ SPEEDGRADE=6 # My OC is -6. 8 is the fastest available (85G?)
 YOWASP=yowasp-
 DESIGN=ring
 prog: $(DESIGN).bit
+	openFPGALoader --board=ulx3s ring.bit
+
+old-prog:
 	fujprog $<
 
 %.bit: %.config
@@ -29,3 +32,6 @@ ncl_lib.v: mk_lut
 
 mk_lut: mk_lut.rs
 	rustc mk_lut.rs
+
+flash: $(DESIGN).bit
+	openFPGALoader --board=ulx3s -f $<
