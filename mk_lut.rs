@@ -101,7 +101,9 @@ fn th33(a: bool, b: bool, c: bool, z: bool) -> bool {
 
 fn main() {
     // Make sure the input names matches the function arguments
-    mk_gate("th22ni", "z", "a", "ack", "z", "init", &th22ni);
-    mk_gate("th22di", "z", "a", "ack", "z", "init", &th22di);
-    mk_gate("th33", "z", "a", "b", "c", "z", &th33);
+    // Note, adopted the naming convections from Fant's NCL_LIB.v
+    // (though the TH22I doesn't exist there)
+    mk_gate("TH22NI", "Z", "A", "B", "Z", "C", &th22ni);
+    mk_gate("TH22DI", "Z", "A", "B", "Z", "C", &th22di);
+    mk_gate("TH33", "Z", "A", "B", "C", "Z", &th33);
 }

@@ -13,7 +13,7 @@ module top(input clk_25mhz,
    // NCL "reset"
    wire           init = !btn[0];
 
-   // N-stage ring of N-1 th22ni and one th22d
+   // N-stage ring of N-1 TH22NI and one TH22D
    // The lone th22di feeds q0, and the rest q
    // The actual performance is extremely sensitive to placement/routing so
    // results vary widely, but as a rule, best results are with N=4 or N=5.
@@ -26,8 +26,8 @@ module top(input clk_25mhz,
    assign ack0 = q[0];
    assign ack = {q0,q[N-2:1]};    // ack[i] = q[i+1 modulo N]
 
-   (* keep *) th22di th22_x         (.z(q0),.init(init), .a(d0), .ack(ack0));
-   (* keep *) th22ni th22_0 [N-2:0] (.z(q), .init(init), .a(d),  .ack(ack));
+   (* keep *) TH22DI th22_x         (.Z(q0),.C(init), .A(d0), .B(ack0));
+   (* keep *) TH22NI th22_0 [N-2:0] (.Z(q), .C(init), .A(d),  .B(ack));
 
 
    // To measure the performance we have to divide the async clock
